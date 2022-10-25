@@ -13,3 +13,15 @@ export interface StopPoint {
 }
 
 export type StopPointCollection = FeatureCollection<Point, StopPoint>;
+
+export interface SingleStopParams {
+  stopId: string;
+}
+
+export interface SingleStopResponse {
+  [line: string]: string[];
+}
+
+export interface StopLookup {
+  [stopId: string]: SingleStopResponse;
+}

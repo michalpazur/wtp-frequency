@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
-import { Empty, MessageResponse } from "../../../types";
-import { GetAllStopsQuery, StopPoint, StopPointCollection } from "../types";
 import { readFile } from "fs/promises";
 import path from "path";
-import { FeatureCollection, Feature, Point, GeometryCollection } from "geojson";
+import { Empty, MessageResponse } from "../../../types";
+import { GetAllStopsQuery, StopPointCollection } from "../types";
 
 export const getAllStops = async (
   req: Request<Empty, Empty, Empty, GetAllStopsQuery>,
@@ -25,7 +24,9 @@ export const getAllStops = async (
   const { minLat, maxLat, minLon, maxLon } = req.query;
 
   try {
-    const fileContents = await readFile(path.join("data", "stops.json"), { encoding: "utf-8" });
+    const fileContents = await readFile(path.join("data", "stops.json"), {
+      encoding: "utf-8",
+    });
     const geoJSON = JSON.parse(fileContents) as StopPointCollection;
 
     geoJSON.features = geoJSON.features.filter((point) => {
