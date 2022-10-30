@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/wtp-frequency/static/js/main.ee27d547.js",
+    "static/js/636.0f02165d.chunk.js": "/wtp-frequency/static/js/636.0f02165d.chunk.js",
+    "index.html": "/wtp-frequency/index.html",
+    "main.ee27d547.js.map": "/wtp-frequency/static/js/main.ee27d547.js.map",
+    "636.0f02165d.chunk.js.map": "/wtp-frequency/static/js/636.0f02165d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.ee27d547.js"
+  ]
+}
