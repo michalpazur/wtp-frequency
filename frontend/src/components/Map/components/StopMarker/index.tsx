@@ -11,10 +11,13 @@ const RoundIcon = styled(Box)(({ theme }) => ({
   height: 15,
   borderRadius: 20,
   boxShadow: theme.shadows[5],
-  backgroundColor: theme.palette.secondary.main,
+  backgroundColor: theme.palette.background.paper,
   borderWidth: 4,
   borderStyle: "solid",
-  borderColor: theme.palette.background.paper,
+  borderColor: theme.palette.text.primary,
+  tranition: theme.transitions.create(["background-color", "border-color"], {
+    duration: theme.transitions.duration.standard,
+  }),
 }));
 
 const StopMarker: React.FC<StopMarkerProps> = ({ marker }) => {
