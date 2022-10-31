@@ -1,3 +1,4 @@
+import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import fs from "fs";
@@ -11,6 +12,11 @@ const port = process.env.PORT;
 
 const app = express();
 
+app.use(
+  cors({
+    origin: process.env.ALLOWED_ORIGIN,
+  })
+);
 app.use(logger);
 
 app.get("/", (req, res) => {
