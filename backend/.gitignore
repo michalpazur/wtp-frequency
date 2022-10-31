@@ -1,2 +1,6 @@
 # Ignore parsed data
 data/*.json
+
+# Ignore HTTPS credentials
+*.key
+*.cert
