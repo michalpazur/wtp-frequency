@@ -1,2 +1,0 @@
-(self.webpackChunkwtp_freq_backend=self.webpackChunkwtp_freq_backend||[]).push([[636],{636:function(e,n){n.printMsg=function(){console.log("This is a message from the demo package")}}}]);
-//# sourceMappingURL=636.0f02165d.chunk.js.map
