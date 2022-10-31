@@ -3,12 +3,15 @@ import express from "express";
 import fs from "fs";
 import https from "https";
 import { stopRouter } from "./routes/stops";
+import { logger } from "./util/logger";
 
 dotenv.config();
 
 const port = process.env.PORT;
 
 const app = express();
+
+app.use(logger);
 
 app.get("/", (req, res) => {
   res.send(`<h1>${new Date()}</h1>`);

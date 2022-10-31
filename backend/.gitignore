@@ -4,3 +4,6 @@ data/*.json
 # Ignore HTTPS credentials
 *.key
 *.cert
+
+# Ignore winston log
+express.log
