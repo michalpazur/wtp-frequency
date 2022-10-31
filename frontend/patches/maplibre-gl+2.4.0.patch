@@ -1,0 +1,8 @@
+diff --git a/node_modules/maplibre-gl/dist/maplibre-gl-csp-worker.d.ts b/node_modules/maplibre-gl/dist/maplibre-gl-csp-worker.d.ts
+new file mode 100644
+index 0000000..27c903a
+--- /dev/null
++++ b/node_modules/maplibre-gl/dist/maplibre-gl-csp-worker.d.ts
+@@ -0,0 +1 @@
++declare module "maplibre-gl/dist/maplibre-gl-csp-worker";
+\ No newline at end of file

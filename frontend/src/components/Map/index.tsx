@@ -1,10 +1,16 @@
 import { BBox } from "geojson";
-import maplibre from "maplibre-gl";
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import maplibre from "!maplibre-gl";
+import maplibreWorker from 'maplibre-gl/dist/maplibre-gl-csp-worker';
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import ReactMap, { MapRef } from "react-map-gl";
 import { useStopsQuery } from "../../queries/useStopsQuery";
 import { StopPointCollection } from "../../services/getStops";
 import StopMarker from "./components/StopMarker";
+
+// https://github.com/maplibre/maplibre-gl-js/issues/1011#issuecomment-1098482300
+maplibre.workerClass = maplibreWorker;
 
 const START_ZOOM = 16;
 const MAX_STOP_ZOOM = 14.5;
