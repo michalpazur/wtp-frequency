@@ -4,6 +4,7 @@ import Map from "./components/Map";
 import ThemeButton from "./components/ThemeButton";
 import { useThemeStore } from "./util/store/useThemeStore";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import StopInfo from "./components/StopInfo";
 
 const lightPalette: PaletteOptions = {
   primary: {
@@ -60,14 +61,23 @@ const App: React.FC = () => {
           MuiButton: {
             styleOverrides: {
               outlined: {
-                borderColor: defaultTheme.palette.text.disabled,
                 boxShadow: defaultTheme.shadows[5],
+                borderColor: defaultTheme.palette.divider,
                 backdropFilter: "blur(5px)",
               },
               sizeSmall: {
                 padding: defaultTheme.spacing(1),
                 minWidth: 40,
                 height: 40,
+              },
+            },
+          },
+          MuiPaper: {
+            styleOverrides: {
+              outlined: {
+                boxShadow: defaultTheme.shadows[5],
+                backgroundColor: "transparent",
+                backdropFilter: "blur(5px)",
               },
             },
           },
@@ -81,6 +91,7 @@ const App: React.FC = () => {
       <CssBaseline />
       <Map />
       <ThemeButton />
+      <StopInfo />
     </ThemeProvider>
   );
 };

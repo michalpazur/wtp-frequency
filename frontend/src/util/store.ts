@@ -10,14 +10,17 @@ import {
   REHYDRATE,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import stopReducer from "./store/useStopStore";
 import themeReducer from "./store/useThemeStore";
 
 const rootReducer = combineReducers({
   themeReducer,
+  stopReducer,
 });
 
 const persistConfig = {
   key: "root",
+  blacklist: ["stopReducer"],
   storage,
 };
 
