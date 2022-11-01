@@ -17,17 +17,19 @@ const lightPalette: PaletteOptions = {
   },
 };
 
+const defaultThemeLight = createTheme({ palette: lightPalette });
+
 const darkPalette: PaletteOptions = {
   mode: "dark",
   primary: {
     main: "#3399FF",
   },
   secondary: {
-    main: "#001E3C",
+    main: "#265D97",
   },
 };
 
-const defaultTheme = createTheme();
+const defaultThemeDark = createTheme({ palette: darkPalette });
 
 const App: React.FC = () => {
   const darkModeDefault = useMediaQuery("(prefers-color-scheme: dark)");
@@ -39,33 +41,39 @@ const App: React.FC = () => {
     }
   }, [changed, darkModeDefault, setThemeAuto]);
 
+  const defaultTheme = useMemo(
+    () => (dark ? defaultThemeDark : defaultThemeLight),
+    [dark]
+  );
+
   const theme = useMemo(
     () =>
       createTheme({
         typography: {
           fontFamily: ["'Work Sans'", "sans-serif"].join(", "),
         },
-        palette: dark ? darkPalette : lightPalette,
+        palette: defaultTheme.palette,
         shape: {
           borderRadius: 10,
         },
         components: {
           MuiButton: {
             styleOverrides: {
-              text: {
+              outlined: {
+                borderColor: defaultTheme.palette.text.disabled,
                 boxShadow: defaultTheme.shadows[5],
+                backdropFilter: "blur(5px)",
               },
               sizeSmall: {
-                padding: 10,
+                padding: defaultTheme.spacing(1),
                 minWidth: 40,
                 height: 40,
-                backdropFilter: "blur(5px)",
               },
             },
           },
         },
       }),
-    [dark]
+    [defaultTheme]
   );
 
   return (

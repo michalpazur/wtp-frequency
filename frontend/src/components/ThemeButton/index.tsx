@@ -7,11 +7,14 @@ import {
 } from "@mui/icons-material";
 import { iconStyles } from "./styles";
 
-const StyledButton = styled(Button)({
+const StyledButton = styled(Button)(({ theme }) => ({
   position: "absolute",
-  top: "20px",
-  left: "20px",
-});
+  top: theme.spacing(2),
+  left: theme.spacing(2),
+  [theme.breakpoints.down("sm")]: {
+    display: "none",
+  },
+}));
 
 const ThemeButton: React.FC = () => {
   const { dark, setTheme } = useThemeStore();
@@ -23,14 +26,15 @@ const ThemeButton: React.FC = () => {
   return (
     <StyledButton
       size="small"
+      variant="outlined"
       color="inherit"
       onClick={handleButtonPress}
       aria-label="Zmień temat graficzny"
     >
-      <Zoom in={!dark}>
+      <Zoom in={dark}>
         <LightMode sx={iconStyles} />
       </Zoom>
-      <Zoom in={dark}>
+      <Zoom in={!dark}>
         <DarkMode sx={iconStyles} />
       </Zoom>
     </StyledButton>
