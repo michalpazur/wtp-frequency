@@ -1,13 +1,8 @@
-import { CloseRounded as CloseIcon } from "@mui/icons-material";
-import { Box, Button, Card, Slide, styled, Typography } from "@mui/material";
+import { Slide, styled } from "@mui/material";
 import React from "react";
 import { useStopStore } from "../../util/store/useStopStore";
-import {
-  closeButton,
-  stopName as stopNameStyle,
-  stopNameContainer,
-} from "./styles";
-import { StopInfoProps } from "./types";
+import LineList from "./components/LineList";
+import StopName from "./components/StopName";
 
 const MAX_WIDTH = 400;
 
@@ -17,48 +12,16 @@ const Wrapper = styled("div")(({ theme }) => ({
   right: theme.spacing(2),
   width: "100%",
   maxWidth: MAX_WIDTH,
+  maxHeight: `calc(100vh - ${theme.spacing(4)})`,
+  display: "flex",
+  flexDirection: "column",
   [theme.breakpoints.down(MAX_WIDTH + 8 * 2 * 2)]: {
     left: theme.spacing(2),
     width: "unset",
   },
 }));
 
-const StopNameContainer = styled(Card)(({ theme }) => ({
-  flexGrow: "1",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  padding: theme.spacing(2),
-}));
-
-const StopInfo = React.forwardRef<HTMLDivElement, StopInfoProps>(
-  ({ onClose }, ref) => {
-    const { stopName } = useStopStore();
-
-    return (
-      <Wrapper ref={ref}>
-        <Box sx={stopNameContainer}>
-          <Button
-            variant="outlined"
-            size="small"
-            color="inherit"
-            onClick={onClose}
-            sx={closeButton}
-          >
-            <CloseIcon />
-          </Button>
-          <StopNameContainer variant="outlined">
-            <Typography variant="h2" sx={stopNameStyle}>
-              {stopName}
-            </Typography>
-          </StopNameContainer>
-        </Box>
-      </Wrapper>
-    );
-  }
-);
-
-const StopInfoWrapper: React.FC = () => {
+const StopInfo: React.FC = () => {
   const { stopId, setActiveStopId, setActiveStopName } = useStopStore();
 
   const onClose = () => {
@@ -73,9 +36,12 @@ const StopInfoWrapper: React.FC = () => {
 
   return (
     <Slide in={!!stopId} direction="left" onExited={onExited} unmountOnExit>
-      <StopInfo onClose={onClose} />
+      <Wrapper>
+        <StopName onClose={onClose} />
+        <LineList />
+      </Wrapper>
     </Slide>
   );
 };
 
-export default StopInfoWrapper;
+export default StopInfo;
