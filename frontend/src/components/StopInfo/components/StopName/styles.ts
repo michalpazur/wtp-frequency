@@ -11,5 +11,6 @@ export const closeButton: SxProps = {
 
 export const stopName: SxProps = {
   fontSize: "1.5rem",
+  fontWeight: 500,
   textAlign: "center",
 };

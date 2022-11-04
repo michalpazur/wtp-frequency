@@ -1,19 +1,27 @@
-import { Card, styled, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Box, Card, CircularProgress, styled, Typography } from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
 import { useSingleStopQuery } from "../../../../queries/useSingleStopQuery";
 import { SingleStopResponse } from "../../../../services/getSingleStop";
 import { useStopStore } from "../../../../util/store/useStopStore";
 import LineListItem from "./components/LineListItem";
 
-const Root = styled(Card)(({ theme }) => ({
+const Root = styled(Card)({
   width: "100%",
   overflow: "scroll",
+});
+
+const InfoRoot = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "center",
+  padding: theme.spacing(2),
 }));
 
 const LineList: React.FC = () => {
   const { stopId } = useStopStore();
-  const { data: queryData } = useSingleStopQuery(stopId);
+  const { data: queryData, isLoading } = useSingleStopQuery(stopId);
   const [data, setData] = useState<SingleStopResponse | undefined>(queryData);
+  const [showSpinner, setShowSpinner] = useState(false);
+  const timeout = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => {
     if (queryData) {
@@ -21,16 +29,31 @@ const LineList: React.FC = () => {
     }
   }, [queryData]);
 
+  useEffect(() => {
+    if (!isLoading) {
+      clearTimeout(timeout.current);
+      setShowSpinner(false);
+    } else {
+      timeout.current = setTimeout(() => setShowSpinner(true), 100);
+    }
+  }, [isLoading]);
+
   return (
     <Root elevation={5}>
-      {data ? (
+      {showSpinner ? (
+        <InfoRoot>
+          <CircularProgress size={48} />
+        </InfoRoot>
+      ) : data ? (
         Object.keys(data).map((line) => (
           <LineListItem key={line} line={line} headsigns={data[line]} />
         ))
       ) : (
-        <Typography sx={{ textAlign: "center" }}>
-          Brak odjazdów dla danego przystanku
-        </Typography>
+        <InfoRoot>
+          <Typography sx={{ textAlign: "center" }}>
+            Brak odjazdów dla danego przystanku
+          </Typography>
+        </InfoRoot>
       )}
     </Root>
   );
