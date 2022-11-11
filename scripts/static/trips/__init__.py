@@ -2,16 +2,25 @@ import pandas
 from ..util.date import get_today
 from typing import Dict, List, TypedDict
 
+trips_columns = "route_id,service_id,trip_id,shape_id,trip_headsign".split(",")
 class Trip(TypedDict):
   line: str
   headsign: str
 
 def load_trips() -> pandas.DataFrame:
-  trips = pandas.read_csv("gtfs/trips.txt")["route_id,service_id,trip_id,trip_headsign".split(",")]
+  trips = pandas.read_csv("gtfs/trips.txt")[trips_columns]
   # Get rid of departure times from trip ids
   trips.trip_id = trips.trip_id.str.rsplit("/", 1).str[0]
   trips = trips.drop_duplicates()
   return trips
+
+def count_shapes() -> pandas.DataFrame:
+  trips = pandas.read_csv("gtfs/trips.txt")[trips_columns]
+  print("Counting trips made with each shape...")
+  # Count number of trips by each shape_id
+  shape_count = trips.groupby(["shape_id"]).size()
+  shape_count = shape_count.reset_index(name="trip_count")
+  return shape_count
 
 def load_services() -> List[str]:
   today = get_today()
@@ -22,6 +31,7 @@ def load_services() -> List[str]:
 class Trips:
   def __init__(self) -> None:
     self.trips = load_trips()
+    self.shape_count = count_shapes()
     self.services = load_services()
 
   def filter_trips(self) -> None:
