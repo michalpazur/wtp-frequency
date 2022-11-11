@@ -5,7 +5,8 @@ from static.trips import Trips
 def main():
   # Create trip data
   trips = Trips()
-  trips.filter_trips()
+  trips.count_shapes()
+  trips.make_trips_df()
   # Create stop data
   stops = Stops(trips)
   stops.save_data()
