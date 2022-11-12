@@ -18,7 +18,7 @@ const InfoRoot = styled(Box)(({ theme }) => ({
 
 const LineList: React.FC = () => {
   const { stopId } = useStopStore();
-  const { data: queryData, isLoading } = useSingleStopQuery(stopId);
+  const { data: queryData, isLoading, isError } = useSingleStopQuery(stopId);
   const [data, setData] = useState<SingleStopResponse | undefined>(queryData);
   const [showSpinner, setShowSpinner] = useState(false);
   const timeout = useRef<ReturnType<typeof setTimeout>>();
@@ -26,17 +26,22 @@ const LineList: React.FC = () => {
   useEffect(() => {
     if (queryData) {
       setData(queryData);
+      return;
     }
-  }, [queryData]);
+
+    if (isError) {
+      setData(undefined);
+    }
+  }, [queryData, isError]);
 
   useEffect(() => {
+    clearTimeout(timeout.current);
     if (!isLoading) {
-      clearTimeout(timeout.current);
       setShowSpinner(false);
     } else {
-      timeout.current = setTimeout(() => setShowSpinner(true), 100);
+      timeout.current = setTimeout(() => setShowSpinner(true), 150);
     }
-  }, [isLoading]);
+  }, [isLoading, stopId]);
 
   return (
     <Root elevation={5}>
