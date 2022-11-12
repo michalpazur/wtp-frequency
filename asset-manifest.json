@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/wtp-frequency/static/js/main.30c34595.js",
+    "main.js": "/wtp-frequency/static/js/main.d7e47b31.js",
     "static/js/636.532c2abd.chunk.js": "/wtp-frequency/static/js/636.532c2abd.chunk.js",
     "index.html": "/wtp-frequency/index.html",
-    "main.30c34595.js.map": "/wtp-frequency/static/js/main.30c34595.js.map",
+    "main.d7e47b31.js.map": "/wtp-frequency/static/js/main.d7e47b31.js.map",
     "636.532c2abd.chunk.js.map": "/wtp-frequency/static/js/636.532c2abd.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.30c34595.js"
+    "static/js/main.d7e47b31.js"
   ]
 }
