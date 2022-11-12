@@ -13,6 +13,7 @@ def main():
   # Create segment data
   shapes = Shapes(trips)
   shapes.count_segment_trips()
+  shapes.make_geojson()
 
 if (__name__ == "__main__"):
   main()
