@@ -105,6 +105,7 @@ class Shapes:
       merged_segments.loc[(merged_segments.trip_count >= min_val) & (merged_segments.trip_count < max_val), "bin"] = i
     
     print("Saving GeoJSON...")
+    merged_segments = merged_segments.astype({ "bin": "int" })
     _json = merged_segments.to_json(drop_id=True).replace("trip_count", "tripCount")
     with open(path.join(DATA_FOLDER, "lines.json"), "w") as f:
       f.write(_json)
