@@ -43,6 +43,7 @@ const defaultThemeDark = createTheme({ palette: darkPalette });
 
 const App: React.FC = () => {
   const darkModeDefault = useMediaQuery("(prefers-color-scheme: dark)");
+  const prefersContrast = useMediaQuery("(prefers-contrast: more)");
   const { dark, changed, setThemeAuto } = useThemeStore();
 
   useEffect(() => {
@@ -81,6 +82,9 @@ const App: React.FC = () => {
                 boxShadow: defaultTheme.shadows[5],
                 borderColor: defaultTheme.palette.divider,
                 backdropFilter: "blur(5px)",
+                backgroundColor: prefersContrast
+                  ? defaultTheme.palette.background.paper
+                  : "transparent",
               },
               sizeSmall: {
                 padding: defaultTheme.spacing(1),
@@ -100,14 +104,16 @@ const App: React.FC = () => {
             styleOverrides: {
               outlined: {
                 boxShadow: defaultTheme.shadows[5],
-                backgroundColor: "transparent",
+                backgroundColor: prefersContrast
+                  ? defaultTheme.palette.background.paper
+                  : "transparent",
                 backdropFilter: "blur(5px)",
               },
             },
           },
         },
       }),
-    [defaultTheme]
+    [defaultTheme, prefersContrast]
   );
 
   return (
