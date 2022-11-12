@@ -46,6 +46,10 @@ const LineLayer: React.FC = () => {
     [dark]
   );
   
+  if (!data) {
+    return null;
+  }
+
   return (
     <Source type="geojson" data={data}>
       <Layer type="line" paint={style} />
