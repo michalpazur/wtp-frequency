@@ -1,4 +1,5 @@
 import {
+  Box,
   createTheme,
   CssBaseline,
   PaletteOptions,
@@ -118,11 +119,11 @@ const App: React.FC = () => {
           <Route
             path="*"
             element={
-              <React.Fragment>
+              <Box sx={{ overflow: "hidden", position: "relative" }}>
                 <Map />
                 <ButtonContainer />
                 <StopInfo />
-              </React.Fragment>
+              </Box>
             }
           />
         </Routes>

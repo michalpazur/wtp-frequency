@@ -7,7 +7,7 @@ import LineListItem from "./components/LineListItem";
 
 const Root = styled(Card)({
   width: "100%",
-  overflow: "scroll",
+  overflow: "auto",
 });
 
 const InfoRoot = styled(Box)(({ theme }) => ({
