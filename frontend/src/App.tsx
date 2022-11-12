@@ -1,10 +1,18 @@
-import { PaletteOptions, useMediaQuery } from "@mui/material";
+import {
+  createTheme,
+  CssBaseline,
+  PaletteOptions,
+  ThemeProvider,
+  useMediaQuery,
+} from "@mui/material";
 import React, { useEffect, useMemo } from "react";
+import { Route, Routes } from "react-router";
+import { BrowserRouter } from "react-router-dom";
+import ButtonContainer from "./components/ButtonContainer";
+import InfoPage from "./components/InfoPage";
 import Map from "./components/Map";
-import ThemeButton from "./components/ThemeButton";
-import { useThemeStore } from "./util/store/useThemeStore";
-import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import StopInfo from "./components/StopInfo";
+import { useThemeStore } from "./util/store/useThemeStore";
 
 const lightPalette: PaletteOptions = {
   primary: {
@@ -52,6 +60,14 @@ const App: React.FC = () => {
       createTheme({
         typography: {
           fontFamily: ["'Work Sans'", "sans-serif"].join(", "),
+          h1: {
+            fontSize: "1.75rem",
+            fontWeight: "bold",
+          },
+          h2: {
+            fontSize: "1.5rem",
+            fontWeight: 500,
+          },
         },
         palette: defaultTheme.palette,
         shape: {
@@ -72,6 +88,13 @@ const App: React.FC = () => {
               },
             },
           },
+          MuiLink: {
+            defaultProps: {
+              target: "_blank",
+              rel: "noopener",
+              underline: "hover",
+            },
+          },
           MuiPaper: {
             styleOverrides: {
               outlined: {
@@ -89,9 +112,21 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Map />
-      <ThemeButton />
-      <StopInfo />
+      <BrowserRouter basename="/wtp-frequency">
+        <Routes>
+          <Route path="info" element={<InfoPage />} />
+          <Route
+            path="*"
+            element={
+              <React.Fragment>
+                <Map />
+                <ButtonContainer />
+                <StopInfo />
+              </React.Fragment>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   );
 };

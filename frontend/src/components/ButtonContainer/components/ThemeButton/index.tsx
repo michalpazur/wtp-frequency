@@ -1,19 +1,14 @@
-import React from "react";
-import { Button, styled, Zoom } from "@mui/material";
-import { useThemeStore } from "../../util/store/useThemeStore";
 import {
-  LightModeOutlined as LightMode,
   DarkModeOutlined as DarkMode,
+  LightModeOutlined as LightMode,
 } from "@mui/icons-material";
+import { Button, styled, Zoom } from "@mui/material";
+import React from "react";
+import { useThemeStore } from "../../../../util/store/useThemeStore";
 import { iconStyles } from "./styles";
 
 const StyledButton = styled(Button)(({ theme }) => ({
-  position: "absolute",
-  top: theme.spacing(2),
-  left: theme.spacing(2),
-  [theme.breakpoints.down("sm")]: {
-    display: "none",
-  },
+  marginBottom: theme.spacing(1),
 }));
 
 const ThemeButton: React.FC = () => {
