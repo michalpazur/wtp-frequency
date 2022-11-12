@@ -1,13 +1,16 @@
 import math
 from os import path
 from typing import List, TypedDict
+
 import geopandas
 import pandas
 from shapely.geometry import LineString, Point
 from shapely.geometry.base import BaseGeometry
 from shapely.ops import linemerge
+
 from ..const import DATA_FOLDER, GPS
 from ..trips import Trips
+
 
 class SegmentInfo(TypedDict):
   trip_count: int
@@ -102,4 +105,6 @@ class Shapes:
       merged_segments.loc[(merged_segments.trip_count >= min_val) & (merged_segments.trip_count < max_val), "bin"] = i
     
     print("Saving GeoJSON...")
-    merged_segments.to_file(path.join(DATA_FOLDER, "lines.json"), driver="GeoJSON")
+    _json = merged_segments.to_json(drop_id=True).replace("trip_count", "tripCount")
+    with open(path.join(DATA_FOLDER, "lines.json"), "w") as f:
+      f.write(_json)
