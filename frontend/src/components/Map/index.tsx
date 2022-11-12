@@ -61,7 +61,7 @@ const Map: React.FC = () => {
       ref={mapRef}
       onLoad={handleViewportChange}
       onMoveEnd={handleViewportChange}
-      style={{ width: "100vw", height: "100vh" }}
+      style={{ width: "100vw", height: "100%" }}
       initialViewState={{
         latitude: 52.229831,
         longitude: 21.011735,

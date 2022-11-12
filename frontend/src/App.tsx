@@ -3,6 +3,7 @@ import {
   createTheme,
   CssBaseline,
   PaletteOptions,
+  SxProps,
   ThemeProvider,
   useMediaQuery,
 } from "@mui/material";
@@ -40,6 +41,13 @@ const darkPalette: PaletteOptions = {
 };
 
 const defaultThemeDark = createTheme({ palette: darkPalette });
+
+const root: SxProps = {
+  overflow: "hidden",
+  position: "absolute",
+  top: 0,
+  bottom: 0,
+};
 
 const App: React.FC = () => {
   const darkModeDefault = useMediaQuery("(prefers-color-scheme: dark)");
@@ -125,7 +133,7 @@ const App: React.FC = () => {
           <Route
             path="*"
             element={
-              <Box sx={{ overflow: "hidden", position: "relative" }}>
+              <Box sx={root}>
                 <Map />
                 <ButtonContainer />
                 <StopInfo />
