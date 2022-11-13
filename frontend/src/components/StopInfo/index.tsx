@@ -12,7 +12,7 @@ const Wrapper = styled("div")(({ theme }) => ({
   right: theme.spacing(2),
   width: "100%",
   maxWidth: MAX_WIDTH,
-  maxHeight: `calc(100vh - ${theme.spacing(4)})`,
+  maxHeight: `calc(100% - ${theme.spacing(4)})`,
   display: "flex",
   flexDirection: "column",
   [theme.breakpoints.down(MAX_WIDTH + 8 * 2 * 2)]: {

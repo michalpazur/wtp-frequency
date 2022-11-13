@@ -9,9 +9,11 @@ import { headwaysContainer, lineStyle } from "./styles";
 const Root = styled(Box)(({ theme }) => ({
   display: "flex",
   width: "100%",
-  borderBottom: "1px solid",
-  borderColor: theme.palette.divider,
   padding: theme.spacing(1),
+  "&:not(:last-child)": {
+    borderBottom: "1px solid",
+    borderColor: theme.palette.divider,
+  }
 }));
 
 const LineNumber = styled(Box)(({ theme }) => ({
