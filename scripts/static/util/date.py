@@ -1,4 +1,5 @@
-from datetime import datetime 
+from datetime import datetime
+import pytz
 
 def get_today() -> str:
-  return datetime.now().strftime("%Y%m%d")
+  return datetime.now(pytz.timezone("Europe/Warsaw")).strftime("%Y%m%d")
