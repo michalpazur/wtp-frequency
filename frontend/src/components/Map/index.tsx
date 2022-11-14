@@ -17,8 +17,8 @@ maplibre.workerClass = maplibreWorker;
 const START_ZOOM = 16;
 const MAX_STOP_ZOOM = 14.5;
 
-const LIGHT_MAP = "e7006e78-523a-488f-ace4-e7923fe085fb";
-const DARK_MAP = "634e0aa8-30ed-4a58-8f3f-821ca28ba652";
+const LIGHT_MAP = "71c6c9a9-0219-4f07-976b-58baaba616f1";
+const DARK_MAP = "dbb5c6d1-d165-4e7b-89b5-06b258775ce3";
 
 const Map: React.FC = () => {
   const mapRef = useRef<MapRef>(null);
