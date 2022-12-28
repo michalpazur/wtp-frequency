@@ -4,7 +4,7 @@ import { getDataFolders } from "./getDataFolders";
 
 export const getDate = async (req: Request<Empty, Empty, Empty, DateQuery>) => {
   let date = req.query.date;
-  const allDates = await getDataFolders(true);
+  const allDates = await getDataFolders();
 
   if (!allDates.includes(date)) {
     date = allDates[0];
