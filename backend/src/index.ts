@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import express from "express";
 import fs from "fs";
 import https from "https";
+import { datesRouter } from "./routes/dates";
 import { shapesRouter } from "./routes/shapes";
 import { stopRouter } from "./routes/stops";
 import { logger } from "./util/logger";
@@ -20,6 +21,7 @@ app.use(
 );
 app.use(logger);
 
+app.use("/dates", datesRouter);
 app.use("/stops", stopRouter);
 app.use("/shapes", shapesRouter);
 
