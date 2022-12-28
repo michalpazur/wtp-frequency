@@ -1,17 +1,19 @@
 import { Request, Response } from "express";
 import { readFile } from "fs/promises";
 import path from "path";
-import { MessageResponse } from "../../../types";
+import { DateQuery, Empty, MessageResponse } from "../../../types";
+import { getDate } from "../../../util/getDate";
 import { SingleStopParams, SingleStopResponse, StopLookup } from "../types";
 
 export const getSingleStop = async (
-  req: Request<SingleStopParams>,
+  req: Request<SingleStopParams, Empty, Empty, DateQuery>,
   res: Response<MessageResponse | SingleStopResponse>
 ) => {
   const { stopId } = req.params;
+  const date = await getDate(req);
 
   try {
-    const fileContents = await readFile(path.join("data", "stop_info.json"), {
+    const fileContents = await readFile(path.join("data", date, "stop_info.json"), {
       encoding: "utf-8",
     });
     const stopLookup = JSON.parse(fileContents) as StopLookup;

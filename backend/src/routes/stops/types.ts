@@ -1,6 +1,7 @@
 import { FeatureCollection, Point } from "geojson";
+import { DateQuery } from "../../types";
 
-export interface GetAllStopsQuery {
+export interface GetAllStopsQuery extends DateQuery {
   minLat: number;
   maxLat: number;
   minLon: number;

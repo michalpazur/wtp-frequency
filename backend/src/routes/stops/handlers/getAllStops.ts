@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { readFile } from "fs/promises";
 import path from "path";
 import { Empty, MessageResponse } from "../../../types";
+import { getDate } from "../../../util/getDate";
 import { GetAllStopsQuery, StopPointCollection } from "../types";
 
 export const getAllStops = async (
@@ -22,9 +23,10 @@ export const getAllStops = async (
   }
 
   const { minLat, maxLat, minLon, maxLon } = req.query;
+  const date = await getDate(req);
 
   try {
-    const fileContents = await readFile(path.join("data", "stops.json"), {
+    const fileContents = await readFile(path.join("data", date, "stops.json"), {
       encoding: "utf-8",
     });
     const geoJSON = JSON.parse(fileContents) as StopPointCollection;
