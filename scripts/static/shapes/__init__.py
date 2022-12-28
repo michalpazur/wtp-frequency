@@ -8,9 +8,9 @@ from shapely.geometry import LineString, Point
 from shapely.geometry.base import BaseGeometry
 from shapely.ops import linemerge
 
-from ..const import DATA_FOLDER, GPS
+from ..const import GPS
 from ..trips import Trips
-
+from ..util.folder import get_folder_name
 
 class SegmentInfo(TypedDict):
   trip_count: int
@@ -107,5 +107,5 @@ class Shapes:
     print("Saving GeoJSON...")
     merged_segments = merged_segments.astype({ "bin": "int" })
     _json = merged_segments.to_json(drop_id=True).replace("trip_count", "tripCount")
-    with open(path.join(DATA_FOLDER, "lines.json"), "w") as f:
+    with open(path.join(get_folder_name(), "lines.json"), "w") as f:
       f.write(_json)

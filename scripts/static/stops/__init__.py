@@ -1,11 +1,12 @@
 import json
-from os import path
+from os import mkdir, path
+from typing import Dict, List
 import geopandas
 import pandas
-from ..trips import Trips
 from shapely.geometry import Point
-from ..const import DATA_FOLDER, GPS
-from typing import Dict, List
+from ..const import GPS
+from ..trips import Trips
+from ..util.folder import get_folder_name
 
 StopLookup = Dict[str, Dict[str, List[str]]]
 
@@ -34,6 +35,7 @@ class Stops:
     self.stop_times = load_stop_times()
 
   def make_stops_lookup(self) -> StopLookup:
+    print("Creating stops lookup table...")
     trips_lookup = self.trips.create_lookup()
     trip_ids = [k for k in trips_lookup]
 
@@ -57,11 +59,17 @@ class Stops:
         stop[line_number] = headsigns
         stops_lookup[stop_id] = stop
       
+    print(f"Created lookup for {len(stops_lookup)} stops.")
     return stops_lookup
 
   def save_data(self) -> None:
     stops_lookup = self.make_stops_lookup()
-    with open(path.join(DATA_FOLDER, "stop_info.json"), "w", encoding="utf-8") as json_f:
+    folder_name = get_folder_name()
+    if (not path.isdir(folder_name)):
+      print(f"Creating new data directory ({folder_name})...")
+      mkdir(folder_name)
+    
+    with open(path.join(folder_name, "stop_info.json"), "w", encoding="utf-8") as json_f:
       json.dump(stops_lookup, json_f, ensure_ascii=False)
     
-    self.stops.to_file(path.join(DATA_FOLDER, "stops.json"), driver="GeoJSON")
+    self.stops.to_file(path.join(folder_name, "stops.json"), driver="GeoJSON")
