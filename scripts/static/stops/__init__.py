@@ -62,8 +62,20 @@ class Stops:
     print(f"Created lookup for {len(stops_lookup)} stops.")
     return stops_lookup
 
+  def filter_stops(self, stops_lookup: StopLookup) -> None:
+    print("Removing unused stops...")
+    all_stops_len = len(self.stops)
+    stops = self.stops
+    stops_with_trips = [k for k in stops_lookup]
+    stops = stops[stops.stopId.isin(stops_with_trips)]
+    self.stops = stops
+    filtered_stops_len = len(stops)
+    print(f"Removed {all_stops_len - filtered_stops_len} stops. {filtered_stops_len} stops remaining.")
+
   def save_data(self) -> None:
     stops_lookup = self.make_stops_lookup()
+    self.filter_stops(stops_lookup)
+
     folder_name = get_folder_name()
     if (not path.isdir(folder_name)):
       print(f"Creating new data directory ({folder_name})...")
