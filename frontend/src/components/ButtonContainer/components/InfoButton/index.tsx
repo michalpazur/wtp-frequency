@@ -4,16 +4,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const InfoButton: React.FC = () => {
-  const handleButtonPress = () => {
-    // AAA
-  };
-
   return (
     <Button
       size="small"
       variant="outlined"
       color="inherit"
-      onClick={handleButtonPress}
       aria-label="Pokaż informacje o projekcie"
       component={Link}
       to="/info"

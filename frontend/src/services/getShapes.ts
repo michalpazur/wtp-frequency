@@ -6,7 +6,10 @@ export interface SegmentInfo {
   bin: number;
 }
 
-export type SegmentCollecton = FeatureCollection<LineString | MultiLineString, SegmentInfo>;
+export type SegmentCollecton = FeatureCollection<
+  LineString | MultiLineString,
+  SegmentInfo
+>;
 
-export const getShapes = async () =>
-  (await axios.get<SegmentCollecton>("/shapes")).data;
+export const getShapes = async (date?: string) =>
+  (await axios.get<SegmentCollecton>("/shapes", { params: { date } })).data;

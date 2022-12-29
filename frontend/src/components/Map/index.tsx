@@ -7,6 +7,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import ReactMap, { MapRef } from "react-map-gl";
 import { useStopsQuery } from "../../queries/useStopsQuery";
 import { StopPointCollection } from "../../services/getStops";
+import { useDateStore } from "../../util/store/useDateStore";
 import { useThemeStore } from "../../util/store/useThemeStore";
 import LineLayer from "./components/LineLayer";
 import StopMarker from "./components/StopMarker";
@@ -22,11 +23,12 @@ const DARK_MAP = "dbb5c6d1-d165-4e7b-89b5-06b258775ce3";
 
 const Map: React.FC = () => {
   const mapRef = useRef<MapRef>(null);
+  const { date } = useDateStore();
+  const { dark } = useThemeStore();
   const [bounds, setBounds] = useState<BBox>();
   const [zoom, setZoom] = useState(START_ZOOM);
   const [stops, setStops] = useState<StopPointCollection["features"]>([]);
-  const { data: stopsData } = useStopsQuery(bounds);
-  const { dark } = useThemeStore();
+  const { data: stopsData } = useStopsQuery(bounds, date);
 
   useEffect(() => {
     if (stopsData) {

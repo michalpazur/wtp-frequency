@@ -2,14 +2,10 @@ import {
   DarkModeOutlined as DarkMode,
   LightModeOutlined as LightMode,
 } from "@mui/icons-material";
-import { Button, styled, Zoom } from "@mui/material";
+import { Button, Zoom } from "@mui/material";
 import React from "react";
 import { useThemeStore } from "../../../../util/store/useThemeStore";
 import { iconStyles } from "./styles";
-
-const StyledButton = styled(Button)(({ theme }) => ({
-  marginBottom: theme.spacing(1),
-}));
 
 const ThemeButton: React.FC = () => {
   const { dark, setTheme } = useThemeStore();
@@ -19,7 +15,7 @@ const ThemeButton: React.FC = () => {
   };
 
   return (
-    <StyledButton
+    <Button
       size="small"
       variant="outlined"
       color="inherit"
@@ -32,7 +28,7 @@ const ThemeButton: React.FC = () => {
       <Zoom in={!dark}>
         <DarkMode sx={iconStyles} />
       </Zoom>
-    </StyledButton>
+    </Button>
   );
 };
 

@@ -2,6 +2,7 @@ import { ExpressionName } from "mapbox-gl";
 import React, { useMemo } from "react";
 import { Layer, Source } from "react-map-gl";
 import { useShapeQuery } from "../../../../queries/useShapeQuery";
+import { useDateStore } from "../../../../util/store/useDateStore";
 import { useThemeStore } from "../../../../util/store/useThemeStore";
 
 const getBin: [ExpressionName, string, string[]] = [
@@ -13,8 +14,9 @@ const interpolateBin = ["interpolate", ["linear"], ["var", "bin"]];
 const interpolateZoom = ["interpolate", ["linear"], ["zoom"]];
 
 const LineLayer: React.FC = () => {
+  const { date } = useDateStore();
   const { dark } = useThemeStore();
-  const { data } = useShapeQuery();
+  const { data } = useShapeQuery(date);
   const style = useMemo<mapboxgl.LinePaint>(
     () => ({
       "line-color": [
@@ -45,7 +47,7 @@ const LineLayer: React.FC = () => {
     }),
     [dark]
   );
-  
+
   if (!data) {
     return null;
   }

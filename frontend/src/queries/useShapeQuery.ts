@@ -1,5 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import { getShapes } from "../services/getShapes";
+import { QueryOptions, useQuery } from "@tanstack/react-query";
+import { getShapes, SegmentCollecton } from "../services/getShapes";
 
-export const useShapeQuery = () =>
-  useQuery(["shape"], async () => await getShapes());
+export const useShapeQuery = (
+  date: string | undefined,
+  queryOptions?: QueryOptions<SegmentCollecton>
+) =>
+  useQuery(["shape", date], async () => await getShapes(date), {
+    enabled: !!date,
+    staleTime: 5 * 60 * 1000,
+    ...queryOptions,
+  });

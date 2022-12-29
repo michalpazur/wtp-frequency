@@ -6,6 +6,7 @@ export interface GetAllStopsQuery {
   maxLat: number;
   minLon: number;
   maxLon: number;
+  date?: string;
 }
 
 interface StopPoint {

@@ -1,10 +1,11 @@
-import { styled } from "@mui/material";
+import { Stack, styled } from "@mui/material";
 import React from "react";
+import { useIsMobile } from "../../util/useIsMobile";
+import CalendarButton from "./components/CalendarButton";
 import InfoButton from "./components/InfoButton";
 import ThemeButton from "./components/ThemeButton";
 
-const Root = styled("div")(({ theme }) => ({
-  display: "grid",
+const Root = styled(Stack)(({ theme }) => ({
   position: "absolute",
   top: theme.spacing(2),
   left: theme.spacing(2),
@@ -15,10 +16,13 @@ const Root = styled("div")(({ theme }) => ({
 }));
 
 const ButtonContainer: React.FC = () => {
+  const isMobile = useIsMobile();
+
   return (
-    <Root>
+    <Root spacing={1} direction={isMobile ? "column-reverse" : "column"}>
       <ThemeButton />
       <InfoButton />
+      <CalendarButton />
     </Root>
   );
 };

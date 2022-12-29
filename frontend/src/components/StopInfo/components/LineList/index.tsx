@@ -2,6 +2,7 @@ import { Box, Card, CircularProgress, styled, Typography } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { useSingleStopQuery } from "../../../../queries/useSingleStopQuery";
 import { SingleStopResponse } from "../../../../services/getSingleStop";
+import { useDateStore } from "../../../../util/store/useDateStore";
 import { useStopStore } from "../../../../util/store/useStopStore";
 import LineListItem from "./components/LineListItem";
 
@@ -18,7 +19,12 @@ const InfoRoot = styled(Box)(({ theme }) => ({
 
 const LineList: React.FC = () => {
   const { stopId } = useStopStore();
-  const { data: queryData, isLoading, isError } = useSingleStopQuery(stopId);
+  const { date } = useDateStore();
+  const {
+    data: queryData,
+    isLoading,
+    isError,
+  } = useSingleStopQuery(stopId, date);
   const [data, setData] = useState<SingleStopResponse | undefined>(queryData);
   const [showSpinner, setShowSpinner] = useState(false);
   const timeout = useRef<ReturnType<typeof setTimeout>>();
