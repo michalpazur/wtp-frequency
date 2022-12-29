@@ -6,9 +6,15 @@ export const header: SxProps = {
 };
 
 export const marginBottom: SxProps = {
-  mb: 1,
+  mb: 2,
 };
 
 export const link: SxProps = {
   display: "block",
+}
+
+export const linkIcon: SxProps = {
+  fontSize: "1rem",
+  position: "relative",
+  top: "1.5px",
 }

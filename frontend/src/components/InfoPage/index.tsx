@@ -1,6 +1,8 @@
+import { GitHub, Twitter } from "@mui/icons-material";
 import { Divider, Link, styled, Typography } from "@mui/material";
 import React from "react";
-import { header, link, marginBottom } from "./styles";
+import WTPIcon from "./components/WTPIcon";
+import { header, link, linkIcon, marginBottom } from "./styles";
 import { Question } from "./types";
 
 const Root = styled("div")(({ theme }) => ({
@@ -26,11 +28,6 @@ export const questions: Question[] = [
       "Im grubsza linia, tym więcej pojazdów porusza się danego dnia po tym odcinku drogi. W przypadku torów tramwajowych i dróg dwukierunkowych liczą się kursy w obie strony.",
   },
   {
-    question: "Jak często aktualizowane są dane?",
-    answer:
-      "Aktualnie dane pochodzą zawsze z ostatniego poniedziałku. W przyszłości udostępniony zostanie wgląd w dane archiwalne.",
-  },
-  {
     question: "Dlaczego trasy w niektórych miejscach wyglądają dziwnie?",
     answer:
       "Trasy linii generowane są automatycznie na podstawie danych rozkładowych ZTM i map OpenStreetMap. Czasem w przypadku remontów, czy tymczasowych objazdów trasy mogą odbiegać od rzeczywistości.",
@@ -47,7 +44,7 @@ const InfoPage: React.FC = () => {
         <Divider sx={marginBottom} />
         {questions.map((q) => (
           <React.Fragment key={q.question}>
-            <Typography variant="h2" sx={marginBottom}>
+            <Typography variant="h2" mb={1}>
               {q.question}
             </Typography>
             <Typography sx={marginBottom}>{q.answer}</Typography>
@@ -55,19 +52,22 @@ const InfoPage: React.FC = () => {
         ))}
         <Divider sx={marginBottom} />
         <Typography>
-          Dane rozkładowe: <Link href="https://ztm.waw.pl">ZTM Warszawa</Link>
+          Dane rozkładowe:{" "}
+          <Link href="https://ztm.waw.pl">
+            <WTPIcon sx={linkIcon} /> ZTM Warszawa
+          </Link>
         </Typography>
         <Typography>
           Dane parsowane dzięki:{" "}
           <Link href="https://github.com/MKuranowski/WarsawGTFS">
-            MKuranowski/WarsawGTFS
+            <GitHub sx={linkIcon} /> MKuranowski/WarsawGTFS
           </Link>
         </Typography>
         <Link sx={link} href="https://twitter.com/michalpazur">
-          Twitter
+          <Twitter sx={linkIcon} /> Twitter
         </Link>
         <Link sx={link} href="https://github.com/michalpazur/wtp-frequency">
-          GitHub
+          <GitHub sx={linkIcon} /> GitHub
         </Link>
       </TextRoot>
     </Root>
