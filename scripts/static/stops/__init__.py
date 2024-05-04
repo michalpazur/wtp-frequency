@@ -21,7 +21,10 @@ def load_stops() -> geopandas.GeoDataFrame:
   return stops_gdf
 
 def load_stop_times() -> pandas.DataFrame:
+  print("Loading stop times...")
   stop_times = pandas.read_csv("gtfs/stop_times.txt", converters={ "stop_id": str })["trip_id,stop_id".split(",")]
+  # Add departure time to subway stop times so that next step works
+  stop_times.loc[stop_times.trip_id.str.startswith(("M1", "M2")), "trip_id"] = stop_times.trip_id + "/_"
   # Get rid of departure times from trip ids
   stop_times.trip_id = stop_times.trip_id.str.rsplit("/", 1).str[0]
   stop_times = stop_times.drop_duplicates()
