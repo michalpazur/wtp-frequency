@@ -5,6 +5,7 @@ import {
   PaletteOptions,
   SxProps,
   ThemeProvider,
+  typographyClasses,
   useMediaQuery,
 } from "@mui/material";
 import type {} from "@mui/x-date-pickers/themeAugmentation";
@@ -137,9 +138,11 @@ const App: React.FC = () => {
               root: ({ theme }) => ({
                 borderRadius: theme.shape.borderRadius,
                 background: `linear-gradient(180deg, ${theme.palette.primary.light}, ${theme.palette.primary.main})`,
-                color: theme.palette.primary.contrastText,
                 zIndex: "1",
                 boxShadow: theme.shadows[2],
+                [`& .${typographyClasses.root}`]: {
+                  color: theme.palette.primary.contrastText,
+                },
               }),
               title: ({ theme }) => ({
                 color: theme.palette.primary.contrastText,
@@ -172,6 +175,7 @@ const App: React.FC = () => {
           MuiYearCalendar: {
             styleOverrides: {
               root: {
+                width: "318px", // 320px - 2 * borderWidth
                 margin: "auto",
               },
             },
