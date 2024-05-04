@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 
 interface DateStore {
-  date?: string;
+  date?: Date;
 }
 
 const initialState: DateStore = {};
@@ -12,7 +12,7 @@ const dateSlice = createSlice({
   name: "date",
   initialState,
   reducers: {
-    setSelectedDate(state, action: PayloadAction<string>) {
+    setSelectedDate(state, action: PayloadAction<Date>) {
       state.date = action.payload;
     },
   },
@@ -24,7 +24,7 @@ export const useDateStore = () => {
   const dispatch = useDispatch();
   const { date } = useSelector((state: RootState) => state.dateReducer);
 
-  const setSelectedDate = (payload: string) =>
+  const setSelectedDate = (payload: Date) =>
     dispatch(dateSlice.actions.setSelectedDate(payload));
 
   return {

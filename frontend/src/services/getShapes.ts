@@ -1,5 +1,6 @@
 import { FeatureCollection, LineString, MultiLineString } from "geojson";
 import { axios } from "../util/axios";
+import { getDate } from "../util/getDate";
 
 export interface SegmentInfo {
   tripCount: number;
@@ -11,5 +12,9 @@ export type SegmentCollecton = FeatureCollection<
   SegmentInfo
 >;
 
-export const getShapes = async (date?: string) =>
-  (await axios.get<SegmentCollecton>("/shapes", { params: { date } })).data;
+export const getShapes = async (date?: Date) =>
+  (
+    await axios.get<SegmentCollecton>("/shapes", {
+      params: { date: getDate(date) },
+    })
+  ).data;

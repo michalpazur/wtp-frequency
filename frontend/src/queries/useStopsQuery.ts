@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { BBox } from "geojson";
 import { getStops } from "../services/getStops";
+import { getDate } from "../util/getDate";
 
-export const useStopsQuery = (bbox: BBox | undefined, date?: string) =>
+export const useStopsQuery = (bbox: BBox | undefined, date?: Date) =>
   useQuery(
     ["stops", bbox, date],
     async () =>
@@ -12,7 +13,7 @@ export const useStopsQuery = (bbox: BBox | undefined, date?: string) =>
         minLon: bbox?.[1],
         maxLat: bbox?.[2],
         maxLon: bbox?.[3],
-        date,
+        date: getDate(date),
       })),
     {
       cacheTime: 0,

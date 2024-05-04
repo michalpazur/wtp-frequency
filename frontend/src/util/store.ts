@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
 
 const persistConfig = {
   key: "root",
-  blacklist: ["dateReducer", "stopReducer"],
+  whitelist: ["themeReducer"],
   storage,
 };
 
@@ -33,7 +33,16 @@ const store = configureStore({
   middleware: (getDefault) =>
     getDefault({
       serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        ignoredPaths: ["dateReducer.date"],
+        ignoredActions: [
+          FLUSH,
+          REHYDRATE,
+          PAUSE,
+          PERSIST,
+          PURGE,
+          REGISTER,
+          "date/setSelectedDate",
+        ],
       },
     }),
 });

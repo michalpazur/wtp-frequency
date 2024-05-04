@@ -7,6 +7,7 @@ import {
   ThemeProvider,
   useMediaQuery,
 } from "@mui/material";
+import type {} from "@mui/x-date-pickers/themeAugmentation";
 import React, { useEffect, useMemo } from "react";
 import { Route, Routes } from "react-router";
 import { BrowserRouter } from "react-router-dom";
@@ -116,6 +117,62 @@ const App: React.FC = () => {
                   ? defaultTheme.palette.background.paper
                   : "transparent",
                 backdropFilter: "blur(5px)",
+              },
+            },
+          },
+          MuiPickersLayout: {
+            styleOverrides: {
+              root: ({ theme }) => ({
+                position: "relative",
+                backgroundColor: "unset !important",
+                overflow: "unset !important",
+                [theme.breakpoints.down("sm")]: {
+                  width: "100%",
+                },
+              }),
+            },
+          },
+          MuiDatePickerToolbar: {
+            styleOverrides: {
+              root: ({ theme }) => ({
+                borderRadius: theme.shape.borderRadius,
+                background: `linear-gradient(180deg, ${theme.palette.primary.light}, ${theme.palette.primary.main})`,
+                color: theme.palette.primary.contrastText,
+                zIndex: "1",
+                boxShadow: theme.shadows[2],
+              }),
+              title: ({ theme }) => ({
+                color: theme.palette.primary.contrastText,
+              }),
+            },
+          },
+          MuiPickersCalendarHeader: {
+            styleOverrides: {
+              root: {
+                width: "100%",
+                maxWidth: "320px",
+                marginLeft: "auto",
+                marginRight: "auto",
+              },
+            },
+          },
+          MuiDateCalendar: {
+            styleOverrides: {
+              root: ({ theme }) => ({
+                width: "100%",
+                position: "relative",
+                top: "-" + theme.shape.borderRadius + "px",
+                border: "1px solid",
+                borderColor: theme.palette.divider,
+                borderBottomRightRadius: theme.shape.borderRadius,
+                borderBottomLeftRadius: theme.shape.borderRadius,
+              }),
+            },
+          },
+          MuiYearCalendar: {
+            styleOverrides: {
+              root: {
+                margin: "auto",
               },
             },
           },
